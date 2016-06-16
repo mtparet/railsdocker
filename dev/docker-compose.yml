@@ -1,0 +1,31 @@
+version: '2'
+services:
+ db:
+  build: ../mysql
+  links:
+    - mysqldata
+  volumes:
+    - /var/lib/mysql
+  ports:
+   - '3407:3306'
+ rails:
+   build: ../rails
+   links:
+     - db
+     - gemdepot
+   expose:
+    - '3000'
+   ports:
+    - '3000:3000'
+   volumes:
+    - "${REPO_PATH}:/usr/src/app"
+   volumes_from:
+    - gemdepot
+ gemdepot:
+  image: busybox:latest
+  volumes:
+   - /ruby_gems/2.3
+ mysqldata:
+  image: busybox:latest
+  volumes:
+   - /var/lib/mysql
