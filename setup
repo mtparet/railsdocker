@@ -1,1 +1,0 @@
-sudo REPO_PATH=/home/matt/dev/womenonrails/rails_test docker-compose run rails gem install rails bundler
